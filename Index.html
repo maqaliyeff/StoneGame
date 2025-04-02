@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 24.8.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		pre { font-family: "Liberation Mono", monospace; font-size: 10pt; background: transparent }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Stone Age Game&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css&quot;&gt;
+    &lt;style&gt;
+        body {
+            font-family: 'Helvetica', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f0f8ff;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(to right, #87CEEB, #4682B4);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            color: #4682B4;
+            border-bottom: 2px solid #4682B4;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        .game-preview {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        .game-screenshot {
+            flex: 1;
+            min-width: 300px;
+            background: #87CEEB;
+            height: 300px;
+            margin-right: 2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-description {
+            flex: 2;
+            min-width: 300px;
+        }
+        .feature {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            color: #4682B4;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        .code-section {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border-left: 4px solid #4682B4;
+        }
+        pre {
+            background: #333;
+            color: #f8f8f8;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+        }
+        .btn {
+            display: inline-block;
+            background: #4682B4;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+        .btn:hover {
+            background: #36648B;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 30px;
+        }
+        .cloud:before, .cloud:after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+        .cloud:before {
+            width: 50px;
+            height: 50px;
+            top: -20px;
+            left: 5px;
+        }
+        .cloud:after {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            right: 15px;
+        }
+        @media (max-width: 768px) {
+            .game-preview {
+                flex-direction: column;
+            }
+            .game-screenshot {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .stone {
+            width: 30px;
+            height: 30px;
+            background-color: #8B4513;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            color: white;
+        }
+        
+        .game-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .take-btn {
+            padding: 8px 16px;
+            background-color: #4682B4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .game-state {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;div class=&quot;clouds&quot;&gt;
+            &lt;div class=&quot;cloud&quot; style=&quot;top: 20%; left: 10%;&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;cloud&quot; style=&quot;top: 40%; left: 30%;&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;cloud&quot; style=&quot;top: 30%; left: 60%;&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;cloud&quot; style=&quot;top: 70%; left: 80%;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;h1&gt;Stone Age&lt;/h1&gt;
+        &lt;p&gt;A strategic stone-taking game implemented in Python&lt;/p&gt;
+        &lt;a href=&quot;https://github.com/maqaliyeff/StoneGame&quot; class=&quot;btn&quot;&gt;&lt;i class=&quot;fab fa-github&quot;&gt;&lt;/i&gt; View on GitHub&lt;/a&gt;
+        &lt;a href=&quot;#download&quot; class=&quot;btn&quot;&gt;&lt;i class=&quot;fas fa-download&quot;&gt;&lt;/i&gt; Download&lt;/a&gt;
+    &lt;/header&gt;
+    
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;game-preview&quot;&gt;
+            &lt;div class=&quot;game-screenshot&quot;&gt;
+                &lt;div class=&quot;stone-game-demo&quot;&gt;
+                    &lt;div class=&quot;game-state&quot;&gt;
+                        &lt;div&gt;Player Score: &lt;span id=&quot;player-score&quot;&gt;0&lt;/span&gt;&lt;/div&gt;
+                        &lt;div&gt;Stones Left: &lt;span id=&quot;stones-left&quot;&gt;20&lt;/span&gt;&lt;/div&gt;
+                        &lt;div&gt;Computer Score: &lt;span id=&quot;computer-score&quot;&gt;0&lt;/span&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;game-board&quot; id=&quot;game-board&quot;&gt;&lt;/div&gt;
+                    &lt;div class=&quot;game-controls&quot;&gt;
+                        &lt;button class=&quot;take-btn&quot; onclick=&quot;takeStones(2)&quot;&gt;Take 2&lt;/button&gt;
+                        &lt;button class=&quot;take-btn&quot; onclick=&quot;takeStones(3)&quot;&gt;Take 3&lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;result&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;game-description&quot;&gt;
+                &lt;h2&gt;About the Game&lt;/h2&gt;
+                &lt;p&gt;Stone Age is a turn-based strategy game where players take turns removing either 2 or 3 stones from a pile. The interesting twist: if the remaining stones are even, the player gets +2 points; if odd, they lose 2 points.&lt;/p&gt;
+                
+                &lt;div class=&quot;feature&quot;&gt;
+                    &lt;i class=&quot;fas fa-chess feature-icon&quot;&gt;&lt;/i&gt;
+                    &lt;strong&gt;Strategic Gameplay&lt;/strong&gt;: Plan your moves carefully to maximize your score while minimizing your opponent's.
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;feature&quot;&gt;
+                    &lt;i class=&quot;fas fa-robot feature-icon&quot;&gt;&lt;/i&gt;
+                    &lt;strong&gt;AI Opponent&lt;/strong&gt;: Challenge the computer with either Minimax or Alpha-Beta Pruning algorithms.
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;feature&quot;&gt;
+                    &lt;i class=&quot;fas fa-cogs feature-icon&quot;&gt;&lt;/i&gt;
+                    &lt;strong&gt;Customizable&lt;/strong&gt;: Adjust the starting number of stones to vary game length and complexity.
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;h2&gt;How to Play&lt;/h2&gt;
+        &lt;p&gt;The game starts with a pile of stones (default: 50). On your turn:&lt;/p&gt;
+        &lt;ol&gt;
+            &lt;li&gt;Choose to take either 2 or 3 stones from the pile.&lt;/li&gt;
+            &lt;li&gt;If the remaining number of stones is even, you get +2 points.&lt;/li&gt;
+            &lt;li&gt;If the remaining number is odd, you lose 2 points.&lt;/li&gt;
+            &lt;li&gt;The game continues until no stones remain.&lt;/li&gt;
+            &lt;li&gt;The player with the highest score wins!&lt;/li&gt;
+        &lt;/ol&gt;
+        
+        &lt;h2&gt;Game Implementation&lt;/h2&gt;
+        &lt;p&gt;Stone Age is built using Python with Tkinter for the GUI. The game implements AI strategies using game tree algorithms:&lt;/p&gt;
+        
+        &lt;div class=&quot;code-section&quot;&gt;
+            &lt;h3&gt;Game State and Tree Structure&lt;/h3&gt;
+            &lt;pre&gt;&lt;code&gt;class GameState:
+    def __init__(self, stones, player_score, computer_score, turn):
+        self.stones = stones
+        self.player_score = player_score
+        self.computer_score = computer_score
+        self.turn = turn
+        self.children = []
+
+    def is_terminal(self):
+        return self.stones == 0
+
+    def evaluate(self):
+        return self.player_score - self.computer_score
+
+class GameTree:
+    def __init__(self, root_state):
+        self.root = root_state
+
+    def build_tree(self, node, depth):
+        if node.is_terminal() or depth == 0:
+            return
+        for move in [2, 3]:
+            if node.stones &gt;= move:
+                new_stones = node.stones - move
+                if new_stones % 2 == 0:
+                    new_pscore = node.player_score + (2 if node.turn == &quot;player&quot; else 0)
+                    new_cscore = node.computer_score + (2 if node.turn == &quot;computer&quot; else 0)
+                else:
+                    new_pscore = node.player_score - (2 if node.turn == &quot;player&quot; else 0)
+                    new_cscore = node.computer_score - (2 if node.turn == &quot;computer&quot; else 0)
+                next_turn = &quot;computer&quot; if node.turn == &quot;player&quot; else &quot;player&quot;
+                child = GameState(new_stones, new_pscore, new_cscore, next_turn)
+                node.children.append(child)
+                self.build_tree(child, depth - 1)&lt;/code&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+        
+        &lt;h2 id=&quot;download&quot;&gt;Installation &amp; Setup&lt;/h2&gt;
+        &lt;p&gt;To run the Stone Age game on your local machine:&lt;/p&gt;
+        &lt;ol&gt;
+            &lt;li&gt;Make sure you have Python 3.x installed&lt;/li&gt;
+            &lt;li&gt;Install required packages: &lt;code&gt;pip install pillow&lt;/code&gt;&lt;/li&gt;
+            &lt;li&gt;Clone the repository: &lt;code&gt;git clone https://github.com/yourusername/stone-age-game.git&lt;/code&gt;&lt;/li&gt;
+            &lt;li&gt;Navigate to the project directory: &lt;code&gt;cd stone-age-game&lt;/code&gt;&lt;/li&gt;
+            &lt;li&gt;Run the game: &lt;code&gt;python game.py&lt;/code&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+        
+        &lt;div class=&quot;feature&quot;&gt;
+            &lt;i class=&quot;fas fa-exclamation-circle feature-icon&quot;&gt;&lt;/i&gt;
+            &lt;strong&gt;Note:&lt;/strong&gt; You'll need to have an image named &quot;image.jpg&quot; in the same directory as the script to serve as the game background.
+        &lt;/div&gt;
+        
+        &lt;h2&gt;Future Enhancements&lt;/h2&gt;
+        &lt;p&gt;Planned improvements for Stone Age include:&lt;/p&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Online multiplayer functionality&lt;/li&gt;
+            &lt;li&gt;Additional AI difficulty levels&lt;/li&gt;
+            &lt;li&gt;Game history and statistics tracking&lt;/li&gt;
+            &lt;li&gt;Mobile-friendly version&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2025 Stone Age Game. Created with Python and Tkinter.&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;script&gt;
+        // Simple interactive demo
+        let stones = 20;
+        let playerScore = 0;
+        let computerScore = 0;
+        let turn = &quot;player&quot;;
+        
+        function initializeGame() {
+            const gameBoard = document.getElementById('game-board');
+            gameBoard.innerHTML = '';
+            
+            for (let i = 0; i &lt; stones; i++) {
+                const stone = document.createElement('div');
+                stone.className = 'stone';
+                stone.innerText = i + 1;
+                gameBoard.appendChild(stone);
+            }
+            
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            document.getElementById('stones-left').innerText = stones;
+            document.getElementById('player-score').innerText = playerScore;
+            document.getElementById('computer-score').innerText = computerScore;
+            
+            const gameBoard = document.getElementById('game-board');
+            gameBoard.innerHTML = '';
+            
+            for (let i = 0; i &lt; stones; i++) {
+                const stone = document.createElement('div');
+                stone.className = 'stone';
+                stone.innerText = i + 1;
+                gameBoard.appendChild(stone);
+            }
+        }
+        
+        function takeStones(count) {
+            if (turn !== &quot;player&quot; || stones &lt; count) return;
+            
+            stones -= count;
+            
+            if (stones % 2 === 0) {
+                playerScore += 2;
+            } else {
+                playerScore -= 2;
+            }
+            
+            turn = &quot;computer&quot;;
+            updateDisplay();
+            
+            if (stones &gt; 0) {
+                setTimeout(computerMove, 1000);
+            } else {
+                showResult();
+            }
+        }
+        
+        function computerMove() {
+            const move = stones &gt;= 3 ? (stones - 2) % 2 === 0 ? 2 : 3 : (stones &gt;= 2 ? 2 : 0);
+            
+            if (move &gt; 0) {
+                stones -= move;
+                
+                if (stones % 2 === 0) {
+                    computerScore += 2;
+                } else {
+                    computerScore -= 2;
+                }
+                
+                turn = &quot;player&quot;;
+                updateDisplay();
+                
+                if (stones === 0) {
+                    showResult();
+                }
+            }
+        }
+        
+        function showResult() {
+            let result = &quot;Game Over! &quot;;
+            if (playerScore &gt; computerScore) {
+                result += &quot;You win!&quot;;
+            } else if (playerScore &lt; computerScore) {
+                result += &quot;Computer wins!&quot;;
+            } else {
+                result += &quot;It's a draw!&quot;;
+            }
+            
+            document.getElementById('result').innerText = result;
+        }
+        
+        function resetDemo() {
+            stones = 20;
+            playerScore = 0;
+            computerScore = 0;
+            turn = &quot;player&quot;;
+            document.getElementById('result').innerText = &quot;&quot;;
+            initializeGame();
+        }
+        
+        // Initialize when page loads
+        window.onload = function() {
+            initializeGame();
+            
+            // Reset every 30 seconds for demo purposes
+            setInterval(resetDemo, 30000);
+        };
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</body>
+</html>
