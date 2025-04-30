@@ -31,7 +31,7 @@ Stone Age is a strategic game where players take turns removing stones from a pi
 ### Setup
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/stone-age-game.git
+   git clone https://github.com/maqaliyeff/stone-age-game.git
    ```
 
 2. Install required packages:
