@@ -48,7 +48,7 @@ Stone Age is a strategic game where players take turns removing stones from a pi
 
 5. Run the game:
    ```
-   python game.py
+   python main.py
    ```
 
 ## Game Logic
